@@ -5,12 +5,14 @@
   </header>
   <div id="content">
     <div class="box">
-      <div class="header"><span>Prueba nuestros SMS</span><i class="fas fa-comments"></i></div>
+      <div class="header"><span><i class="fas fa-comments"></i> Prueba nuestros SMS</span></div>
       <div class="content">
         <div class="api-key" [hidden]="apiExists === true">
-          <div>API KEY <i class="fa fa-question-circle red" title="Introduce el código que te dimos anteriormente. Si no posees código haz clic en el botón de la esquina superior derecha." aria-hidden="true"></i></div>
+          <div>API KEY <i class="fa fa-question-circle gray" title="Introduce el código que te dimos anteriormente. Si no posees código haz clic en el botón de la esquina superior derecha." aria-hidden="true"></i></div>
           <input type="text" name="apiKey" placeholder="Escribe aquí tu API KEY..."/>
-          <button class="apikey-btn">Guardar</button>
+          <div class="btn-container">
+              <button class="apikey-btn">Guardar</button>
+          </div>
         </div>
         <div class="sender" [hidden]="apiExists === false">
           <div class="indicators">
@@ -18,7 +20,7 @@
                 <div class="api-key-badge" title="API KEY"><i class="fas fa-key"></i> {{ apiKey }}</div>
                 <i class="fas fa-trash red delete-api-key" title="Eliminar API KEY" (click)="deleteKey()"></i>
             </div>
-            <div class="sms-left" title="SMS Restantes / Clic para ver SMS enviados" (click)="changeMode('sended')"><i class="fas fa-mail-bulk"></i>&nbsp; {{ messagesLeft }}/30</div>
+            <div class="sms-left" title="SMS Restantes / Clic para ver SMS enviados" (click)="changeMode('sended')">{{ messagesLeft }}/30</div>
           </div>
           <div class="form">
             <div class="options">
@@ -31,14 +33,19 @@
                 <input type="phone" name="apiKey" placeholder="Escribe aquí el teléfono..."/>
                 <div class="label-form-title">Mensaje</div>
                 <textarea placeholder="Mensaje a enviar..."></textarea>
-                <button class="apikey-btn">Enviar SMS</button>
+                <div class="btn-container">
+                  <button class="apikey-btn">Enviar SMS</button>
+                </div>
             </div>
             <!-- Import CSV -->
             <div class="import" [hidden]="mode !== 'import'">
               <div class="file">
                   <input type="file" accept=".csv" value=""/>
               </div>
-              <button class="apikey-btn">Importar CSV</button>
+              <div class="btn-container">
+                <button class="apikey-btn">Importar CSV</button>
+              </div>
+              
             </div>
             <!-- Sended messages list -->
             <div class="sended" [hidden]="mode !== 'sended'">
@@ -55,7 +62,10 @@
                     <div><i class="fas fa-check-circle green"></i></div>
                   </div>
                 </div>
-                <button class="apikey-btn" (click)="changeMode('manual')"><i class="fas fa-arrow-left"></i> Volver atrás</button>
+                <div class="btn-container">
+                  <button class="apikey-btn" (click)="changeMode('manual')"><i class="fas fa-arrow-left"></i> Volver atrás</button>
+                </div>
+                
             </div>
           </div>
         </div>

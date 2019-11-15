@@ -24,18 +24,15 @@
 
 #layout > header > #trial {
     padding: 5px 15px;
-    background: #2d51cc;
-    color: white;
+    background: white;
+    color: #0D71B9;
     font-weight: 600;
     border-radius: 50px;
-    text-shadow: 0.3px 0.8px #303030;
     text-decoration: none;
     text-align: center;
+    border: 2px solid #0D71B9;
 }
 
-#layout > header > #trial:hover {
-    background-color: #315ae7;
-}
 
 #layout > header > #trial:active {
     transform: scale(0.8);
@@ -60,7 +57,7 @@
 }
 
 #layout > #content > .box > .header {
-    background-color: #2d51cc;
+    background-color: #0D71B9;
     width: 100%;
     height: 50px;
     border-top-left-radius: 5px;
@@ -75,7 +72,7 @@
 }
 
 #layout > #content > .box > .content {
-    padding: 15px;
+    padding: 40px;
 }
 
 #layout > #content > .box > .content > .api-key > div {
@@ -89,7 +86,7 @@ input, textarea {
     padding: 0;
     margin: 0;
     border: none;
-    border: 1px solid #ccc;
+    border: 2px solid #0D71B9;
     width: 100%;
     border-radius: 3px;
     padding: 5px 10px;
@@ -109,20 +106,25 @@ input, textarea {
 }
 
 .red {
-    color: #d52020;
+    color: #EF374E;
 }
 
 .green {
-    color: green;
+    color: #41d141;
+}
+
+.gray {
+    color: gray;
+    cursor: pointer;
 }
 
 button {
     display: inline-block;
     border: none;
-    padding: 5px 10px;
+    padding: 10px 50px;
     margin: 0;
     text-decoration: none;
-    background: #d52020;
+    background: #0D71B9;
     color: #ffffff;
     cursor: pointer;
     text-align: center;
@@ -132,12 +134,12 @@ button {
     -moz-appearance: none;
     font-size: large;
     font-weight: 600;
-    border-radius: 3px;
+    border-radius: 50px;
 }
 
 button:hover,
 button:focus {
-    background: #c02b2b;
+    background: #00A2F9;
 }
 
 button:active {
@@ -145,7 +147,6 @@ button:active {
 }
 
 .apikey-btn {
-    width: 100%;
     margin-top: 15px;
 }
 
@@ -162,7 +163,7 @@ button:active {
 }
 
 .indicators > div > .api-key-badge {
-    background: #465150;
+    background: #4D4B4C;
     padding: 7px 10px;
     border-radius: 3px;
     color: white;
@@ -174,7 +175,7 @@ button:active {
 }
 
 .indicators > .sms-left {
-    background: orange;
+    background: #FFA626;
     color: white;
     padding: 5px 10px;
     border-radius: 50px;
@@ -192,13 +193,16 @@ button:active {
 }
 
 .form > .options {
+    width: 100%;
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
-    margin-bottom: 15px;
+    margin-bottom: 30px;
 }
 
 .form > .options > .option {
+    text-align: center;
+    width: calc(100% / 2);
     padding: 10px 15px;
     font-weight: 600;
     font-size: larger;
@@ -208,7 +212,7 @@ button:active {
 
 
 .form > .options > .option.active {
-    border-bottom: 3px solid #2d51cc;
+    border-bottom: 3px solid #0D71B9;
 }
 
 .label-form-title {
@@ -222,9 +226,11 @@ textarea {
 
 .file {
     padding: 50px 0;
-    background: #e4e4e4;
+    background: #EFF0F4;
     border-radius: 3px;
     text-align: center;
+    border: 1px dashed #4D4B4C;
+
 }
 
 .file > input {
@@ -243,21 +249,30 @@ textarea {
 }
 
 .table > .header {
-    background: #c9c9c9;
+    background: #EFF0F4;
     font-weight: 500;
     display: grid;
     grid-template-columns: 1fr 2fr 1fr;
     text-align: center;
     padding: 10px 0;
     text-transform: uppercase;
-    font-style: italic;
     font-weight: bold;
+    color: #4D4B4C;
+}
+
+.table > .header > div:first-child {
+    border-right: 1px solid white;
+}
+
+.table > .header > div:last-child {
+    border-left: 1px solid white;
 }
 
 .table > .data {
     display: grid;
     grid-template-columns: 1fr 2fr 1fr;
     padding: 10px 0;
+    border-left: 1px solid #EFF0F4;
 }
 
 .table > .data > div {
@@ -270,4 +285,9 @@ textarea {
 
 .table > .data > div:empty:before {
     content: "-";
+}
+
+.btn-container {
+    width: 100%;
+    text-align: center;
 }
