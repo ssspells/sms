@@ -4,6 +4,16 @@
     <a href="/" id="trial">Obtén tu API KEY <i class="fas fa-caret-right"></i></a>
   </header>
   <div id="content">
+    <div id="alerts">
+      <div *ngFor="let alert of alerts; let i = index" class="alert {{ alert.type }}">
+        <div class="icon"><i class="fa fa-{{ iconAlerts[alert.type] }}"></i></div>
+        <div class="text">
+          <div class="title-alert">{{ alert.title }}</div>
+          <div class="message-alert">{{ alert.message }}</div>
+        </div>
+        <div class="close" (click)="closeAlert(i)"><i class="fa fa-times"></i></div>
+      </div>
+    </div>
     <div class="box">
       <div class="header"><span><i class="fas fa-comments"></i> Prueba nuestros SMS</span></div>
       <div class="content">
@@ -56,7 +66,7 @@
                     <div>Mensaje</div>
                     <div>Estado</div>
                   </div>
-                  <div class="data" *ngFor="let a of fakeArray; let index = index">
+                  <div class="data">
                     <div>+56955555555</div>
                     <div>Mensaje de prueba.</div>
                     <div><i class="fas fa-check-circle green"></i></div>
@@ -65,7 +75,6 @@
                 <div class="btn-container">
                   <button class="apikey-btn" (click)="changeMode('manual')"><i class="fas fa-arrow-left"></i> Volver atrás</button>
                 </div>
-                
             </div>
           </div>
         </div>
