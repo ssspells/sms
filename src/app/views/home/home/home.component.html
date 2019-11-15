@@ -1,11 +1,11 @@
 <div id="layout">
   <header>
     <div id="logo"></div>
-    <a href="/" id="trial">Obtén tu API KEY <i class="fas fa-caret-right"></i></a>
+    <a href="/" id="trial" [hidden]="apiExists">Obtén tu API KEY <i class="fas fa-caret-right"></i></a>
   </header>
   <div id="content">
     <div id="alerts">
-      <div *ngFor="let alert of alerts; let i = index" class="alert {{ alert.type }}">
+      <div *ngFor="let alert of alerts; let i = index" class="alert {{ alert.type }} animated bounceInRight">
         <div class="icon"><i class="fa fa-{{ iconAlerts[alert.type] }}"></i></div>
         <div class="text">
           <div class="title-alert">{{ alert.title }}</div>
@@ -17,14 +17,14 @@
     <div class="box">
       <div class="header"><span><i class="fas fa-comments"></i> Prueba nuestros SMS</span></div>
       <div class="content">
-        <div class="api-key" [hidden]="apiExists === true">
+        <div class="api-key" [hidden]="apiExists">
           <div>API KEY <i class="fa fa-question-circle gray" title="Introduce el código que te dimos anteriormente. Si no posees código haz clic en el botón de la esquina superior derecha." aria-hidden="true"></i></div>
-          <input type="text" name="apiKey" placeholder="Escribe aquí tu API KEY..."/>
+          <input type="text" [(ngModel)]="apiKeyForm" placeholder="Escribe aquí tu API KEY..."/>
           <div class="btn-container">
-              <button class="apikey-btn">Guardar</button>
+              <button class="apikey-btn" (click)="validateKey(apiKeyForm)">Guardar</button>
           </div>
         </div>
-        <div class="sender" [hidden]="apiExists === false">
+        <div class="sender" [hidden]="!apiExists">
           <div class="indicators">
             <div>
                 <div class="api-key-badge" title="API KEY"><i class="fas fa-key"></i> {{ apiKey }}</div>
@@ -40,20 +40,20 @@
             <!-- SMS Manual div -->
             <div class="manual" [hidden]="mode !== 'manual'">
                 <div class="label-form-title">Número de teléfono</div>
-                <input type="phone" name="apiKey" placeholder="Escribe aquí el teléfono..."/>
+                <input type="phone" name="apiKey" [(ngModel)]="phoneForm" placeholder="Escribe aquí el teléfono..."/>
                 <div class="label-form-title">Mensaje</div>
-                <textarea placeholder="Mensaje a enviar..."></textarea>
+                <textarea placeholder="Mensaje a enviar..." [(ngModel)]="messageForm"></textarea>
                 <div class="btn-container">
-                  <button class="apikey-btn">Enviar SMS</button>
+                  <button class="apikey-btn" (click)="sendMessage()">Enviar SMS</button>
                 </div>
             </div>
             <!-- Import CSV -->
             <div class="import" [hidden]="mode !== 'import'">
               <div class="file">
-                  <input type="file" accept=".csv" value=""/>
+                  <input type="file" (change)="onFileSelect($event.target)" accept=".csv" value=""/>
               </div>
               <div class="btn-container">
-                <button class="apikey-btn">Importar CSV</button>
+                <button class="apikey-btn" (click)="loadCsv()">Importar CSV</button>
               </div>
               
             </div>
