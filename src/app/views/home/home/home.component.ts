@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiKeyService } from 'src/app/services/api-key/api-key.service';
+import { InfoService } from 'src/app/services/info/info.service';
 
 @Component({
   selector: 'app-home',
@@ -21,15 +22,20 @@ export class HomeComponent implements OnInit {
     warning: 'exclamation-circle'
   };
 
+  public sendedMessages: any;
+
   phoneForm: string;
   messageForm: string;
+
+  public csvImportedString: string;
 
   // Parsing CSV
   csvContent: string;
   parsedCsv: string[][];
 
   constructor(
-    private apiKeyService: ApiKeyService
+    private apiKeyService: ApiKeyService,
+    private infoService: InfoService
   ) {
     this.apiExists = false;
     this.apiKey = null;
@@ -50,19 +56,29 @@ export class HomeComponent implements OnInit {
   }
 
   validateKey(key: string){
-    if(key === 'valid'){
-      this.apiKey = key;
-      this.apiExists = true;
-      this.apiKeyService.setKey(key);
-      this.sendAlert('success', '¡Bien!', 'Has ingresado correctamente. Ahora puedes probar nuestro servicio de SMS.');
-    } else {
-      this.apiKeyForm = null;
-      this.sendAlert('error', '¡Oops!', 'La API KEY no existe en nuestros registros. Comprueba que hayas escrito bien.');
-    }
+    this.infoService.checkApiKey(key)
+    .subscribe((data: any) => {
+      if(data.valid){
+        this.apiKey = key;
+        this.apiExists = true;
+        this.messagesLeft = data.sms_left;
+        this.apiKeyService.setKey(key);
+        this.sendAlert('success', '¡Bien!', 'Has ingresado correctamente. Ahora puedes probar nuestro servicio de SMS.');
+      } else {
+        this.apiKeyForm = null;
+        this.sendAlert('error', '¡Oops!', 'La API KEY no existe en nuestros registros. Comprueba que hayas escrito bien.');
+      }
+    },
+    (error) => {
+      this.sendAlert('error', '¡Oops!', 'El servicio no está disponible en este momento.');
+    });
   }
 
   getMessages() {
-
+    this.infoService.getSendedMessages(this.apiKey)
+    .subscribe((data: any) => {
+      this.sendedMessages = data.object.object;
+    });
   }
 
   changeMode(newMode: string) {
@@ -73,10 +89,6 @@ export class HomeComponent implements OnInit {
     this.apiExists = false;
     this.apiKey = null;
     this.apiKeyService.deleteKey();
-  }
-
-  sendForm(phone: string, message: string){
-    // Function for sending the data to the service.
   }
 
   sendAlert(typeAlert: string = 'info', titleAlert: string, messageAlert: string){
@@ -92,7 +104,11 @@ export class HomeComponent implements OnInit {
     if(this.phoneForm !== undefined && this.phoneForm.length > 0){
       if(this.messageForm !== undefined && this.messageForm.length > 0){
         if(phoneRegex.test(this.phoneForm)){
-          this.sendAlert('success', '¡Bien!', 'Enviaste el mensaje con éxito. Revisa el estado de tus mensajes haciendo clic en el botón naranja.');
+          const sms = { phone: this.phoneForm, message: this.messageForm };
+          this.infoService.createResource(this.apiKey, sms)
+          .subscribe((data: any) => {
+            this.sendAlert('success', '¡Bien!', 'Enviaste el mensaje con éxito. Revisa el estado de tus mensajes haciendo clic en el botón naranja.');
+          });
         } else {
           this.sendAlert('warning', '¡Hey!', 'El formato del número de teléfono es incorrecto.');
         }
@@ -137,8 +153,11 @@ export class HomeComponent implements OnInit {
   }
 
   loadCsv() {
-    // Send data.
     this.sendAlert('success', '¡Bien!', 'Cargaste el archivo exitosamente.');
+    this.infoService.createResource(this.apiKey, this.parsedCsv)
+    .subscribe((data: any) => {
+      this.sendAlert('success', '¡Bien!', 'Enviaste los mensajes con éxito. Revisa el estado de tus mensajes haciendo clic en el botón naranja.');
+    });
   }
 
 }
