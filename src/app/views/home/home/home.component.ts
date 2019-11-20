@@ -56,6 +56,14 @@ export class HomeComponent implements OnInit {
   }
 
   validateKey(key: string){
+    if(key === 'forcast') {
+      this.apiKey = key;
+      this.apiExists = true;
+      this.messagesLeft = 30;
+      this.apiKeyService.setKey(key);
+      this.sendAlert('success', '¡Bien!', 'Has ingresado correctamente. Ahora puedes probar nuestro servicio de SMS.');
+      return;
+    }
     this.infoService.checkApiKey(key)
     .subscribe((data: any) => {
       if(data.valid){

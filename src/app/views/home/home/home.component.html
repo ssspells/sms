@@ -1,9 +1,11 @@
 <div id="layout">
+  <!-- Header / Nav -->
   <header>
     <div id="logo"></div>
     <a href="/" id="trial" [hidden]="apiExists">Obtén tu API KEY <i class="fas fa-caret-right"></i></a>
   </header>
   <div id="content">
+    <!-- Alerts, notifications -->
     <div id="alerts">
       <div *ngFor="let alert of alerts; let i = index" class="alert {{ alert.type }} animated bounceInRight">
         <div class="icon"><i class="fa fa-{{ iconAlerts[alert.type] }}"></i></div>
@@ -14,9 +16,11 @@
         <div class="close" (click)="closeAlert(i)"><i class="fa fa-times"></i></div>
       </div>
     </div>
+    <!-- Main content -->
     <div class="box">
       <div class="header"><span><i class="fas fa-comments"></i> Prueba nuestros SMS</span></div>
       <div class="content">
+        <!-- Main box without api key -->
         <div class="api-key" [hidden]="apiExists">
           <div>API KEY <i class="fa fa-question-circle gray" title="Introduce el código que te dimos anteriormente. Si no posees código haz clic en el botón de la esquina superior derecha." aria-hidden="true"></i></div>
           <input type="text" [(ngModel)]="apiKeyForm" placeholder="Escribe aquí tu API KEY..."/>
@@ -24,6 +28,7 @@
               <button class="apikey-btn" (click)="validateKey(apiKeyForm)">Guardar</button>
           </div>
         </div>
+        <!-- Main box with api key -->
         <div class="sender" [hidden]="!apiExists">
           <div class="indicators">
             <div>
