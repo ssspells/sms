@@ -16,21 +16,20 @@
 #layout > header > #logo {
     width: 238px;
     height: 46px;
-    background: url(/assets/img/forcast.png);
+    background: url(/assets/img/logo_boostlab.png);
     background-size: 80%;
     background-position: center;
     background-repeat: no-repeat;
 }
 
 #layout > header > #trial {
-    padding: 5px 15px;
-    background: white;
-    color: #0D71B9;
+    padding: 10px 15px;
+    color: white;
+    background-color: #c8dd16;
     font-weight: 600;
     border-radius: 50px;
     text-decoration: none;
     text-align: center;
-    border: 2px solid #0D71B9;
 }
 
 
@@ -134,7 +133,8 @@
 }
 
 #layout > #content > .box > .header {
-    background-color: #0D71B9;
+    background: rgb(0,220,241);
+    background: linear-gradient(90deg, rgba(0,220,241,1) 0%, rgba(0,192,234,1) 50%);
     width: 100%;
     height: 50px;
     border-top-left-radius: 5px;
@@ -152,7 +152,7 @@
     padding: 40px;
 }
 
-#layout > #content > .box > .content > .api-key > div {
+#layout > #content > .box > .content > .api-key > div.title {
     margin: 0;
     font-size: 16px;
     margin-bottom: 10px;
@@ -163,7 +163,7 @@ input, textarea {
     padding: 0;
     margin: 0;
     border: none;
-    border: 2px solid #0D71B9;
+    border: 2px solid #008a87;
     width: 100%;
     border-radius: 3px;
     padding: 10px 15px;
@@ -201,7 +201,7 @@ button {
     padding: 10px 50px;
     margin: 0;
     text-decoration: none;
-    background: #0D71B9;
+    background: #00dfe9;
     color: #ffffff;
     cursor: pointer;
     text-align: center;
@@ -211,12 +211,12 @@ button {
     -moz-appearance: none;
     font-size: large;
     font-weight: 600;
-    border-radius: 50px;
+    border-radius: 5px;
 }
 
 button:hover,
 button:focus {
-    background: #00A2F9;
+    background: #00dfe9;
 }
 
 button:active {
@@ -240,7 +240,7 @@ button:active {
 }
 
 .indicators > div > .api-key-badge {
-    background: #4D4B4C;
+    background: #008a87;
     padding: 7px 10px;
     border-radius: 3px;
     color: white;
@@ -254,7 +254,7 @@ button:active {
 .indicators > .sms-left {
     background: #FFA626;
     color: white;
-    padding: 5px 10px;
+    padding: 5px 15px;
     border-radius: 50px;
     cursor: pointer;
 }
@@ -284,12 +284,13 @@ button:active {
     font-weight: 600;
     font-size: larger;
     cursor: pointer;
+    color: #008a87;
     border-bottom: 3px solid transparent;
 }
 
 
 .form > .options > .option.active {
-    border-bottom: 3px solid #0D71B9;
+    border-bottom: 3px solid #c8dd16;
 }
 
 .label-form-title {

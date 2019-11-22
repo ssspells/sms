@@ -27,6 +27,8 @@ export class HomeComponent implements OnInit {
   phoneForm: string;
   messageForm: string;
 
+  public title: string;
+
   public csvImportedString: string;
 
   // Parsing CSV
@@ -37,6 +39,7 @@ export class HomeComponent implements OnInit {
     private apiKeyService: ApiKeyService,
     private infoService: InfoService
   ) {
+    this.title = 'Bienvenido a SMS Boostlab';
     this.apiExists = false;
     this.apiKey = null;
     this.messagesLeft = 0;
